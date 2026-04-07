@@ -15,8 +15,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
-
 - task: SonarCloudPrepare@4
   inputs:
     SonarQube: 'Sonarcloud'
@@ -44,9 +42,9 @@ steps:
 #     languages: 'csharp'
 #     buildtype: 'none'
  
-- task: AdvancedSecurity-Codeql-Analyze@1
-  displayName: Perform CodeQL Analysis
+# - task: AdvancedSecurity-Codeql-Analyze@1
+#   displayName: Perform CodeQL Analysis
  
-- task: AdvancedSecurity-Publish@1
-  inputs:
-    SarifsInputDirectory: '$(Build.SolutionDirectory)/.gdn/'
+# - task: AdvancedSecurity-Publish@1
+#   inputs:
+#     SarifsInputDirectory: '$(Build.SolutionDirectory)/.gdn/'
