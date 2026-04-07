@@ -1,5 +1,6 @@
 # ASP.NET Core
 
+
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -14,16 +15,34 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+
+- task: SonarCloudPrepare@4
+  inputs:
+    SonarQube: 'Sonarcloud'
+    organization: 'devops-jayasree'
+    scannerMode: 'dotnet'
+    projectKey: 'devops-jayasree_dotnetcorewebapi'
+    projectName: 'dotnetcorewebapi'
+
+- task: SonarQubeAnalyze@8
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: AdvancedSecurity-Codeql-Init@1
-  displayName: Initialize CodeQL
+- task: SonarQubePublish@8
   inputs:
-# build mode `none` is supported for C# but build mode `none` is NOT supported for Swift
-# so this pipeline definition will result in a failed run
-    languages: 'csharp'
-    buildtype: 'none'
+    pollingTimeoutSec: '300'
+
+# - task: AdvancedSecurity-Codeql-Init@1
+#   displayName: Initialize CodeQL
+#   inputs:
+# # build mode `none` is supported for C# but build mode `none` is NOT supported for Swift
+# # so this pipeline definition will result in a failed run
+#     languages: 'csharp'
+#     buildtype: 'none'
  
 - task: AdvancedSecurity-Codeql-Analyze@1
   displayName: Perform CodeQL Analysis
