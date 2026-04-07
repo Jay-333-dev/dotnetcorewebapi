@@ -23,12 +23,12 @@ steps:
     projectKey: 'devops-jayasree_dotnetcorewebapi'
     projectName: 'dotnetcorewebapi'
 
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
 - task: SonarQubeAnalyze@8
   inputs:
     jdkversion: 'JAVA_HOME_17_X64'
-
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - task: SonarQubePublish@8
   inputs:
