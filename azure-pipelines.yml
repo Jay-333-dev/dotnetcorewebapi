@@ -48,6 +48,14 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker'
+    repository: 'jay3333/dotnetcorewebapi'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: ' .'
+
 # - task: AdvancedSecurity-Codeql-Init@1
 #   displayName: Initialize CodeQL
 #   inputs:
